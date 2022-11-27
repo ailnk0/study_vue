@@ -2,9 +2,9 @@
 
   <div v-if="isMsgShow" class="black-bg">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>내용</p>
-      <button @click="toggleMsg">닫기</button>
+      <h4>{{ products[curIndex].title }}</h4>
+      <p>{{ products[curIndex].content }}</p>
+      <button @click="toggleDetail">닫기</button>
     </div>
   </div>
 
@@ -13,10 +13,10 @@
     <a v-for="item in menuItems" :key="item">{{ item }}</a>
   </div>
 
-  <div v-for="p in products" :key="p" :style="itemStyle">
+  <div v-for="(p, i) in products" :key="i" :style="itemStyle">
     <img class="room-img" :src="p.image">
-    <h4 @click="toggleMsg">{{ p.title }}</h4>
-    <p>{{ p.price }} 만원</p>
+    <h4 @click="toggleDetail(i)">{{ p.title }}</h4>
+    <p>{{ p.price }}원</p>
   </div>
 
 </template>
@@ -30,14 +30,16 @@ export default {
   data() {
     return {
       isMsgShow: false,
+      curIndex: 0,
       menuItems: ['Home', 'Products', 'About'],
       products: data,
       itemStyle: 'color : darkslateblue'
     }
   },
   methods: {
-    toggleMsg() {
+    toggleDetail(i) {
       this.isMsgShow = !this.isMsgShow;
+      this.curIndex = i;
     }
   },
   components: {
