@@ -7,7 +7,7 @@
       <p>{{ products[curIndex].content }}</p>
       <p>{{ products[curIndex].price }}원</p>
       <Discount />
-      <button @click="toggleDetail">닫기</button>
+      <button @click="send">닫기</button>
     </div>
   </div>
 
@@ -15,15 +15,20 @@
 
 <script>
 export default {
-    name : 'MsgDlg',
-    props : {
-        products : Array,
-        curIndex : Number,
-        isMsgShow : Boolean,
-        toggleDetail : Function
+  name: 'MsgDlg',
+  props: {
+    products: Array,
+    curIndex: Number,
+    isMsgShow: Boolean,
+  },
+  methods: {
+    send() {
+      this.$emit('toggleDetail', this.products[this.curIndex].id);
     }
+  }
 }
 </script>
 
 <style>
+
 </style>

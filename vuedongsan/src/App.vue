@@ -1,11 +1,12 @@
 <template>
-  <MsgDlg :products="products" :curIndex="curIndex" :isMsgShow="isMsgShow" :toggleDetail="toggleDetail" />
+  <MsgDlg @toggleDetail="toggleDetail($event)" :products="products" :curIndex="curIndex" :isMsgShow="isMsgShow" />
   <div class="menu">
     <img alt="Vue logo" src="./assets/logo.png">
     <a v-for="item in menuItems" :key="item">{{ item }}</a>
   </div>
   <Discount />
-  <ProductCard v-for="(p, i) in products" :key="i" :p="p" :i="i" :toggleDetail="toggleDetail" :style="itemStyle"/>
+  <ProductCard @toggleDetail="toggleDetail($event)" v-for="(p, i) in products" :key="i" :p="p" :i="i"
+    :style="itemStyle" />
 </template>
 
 <script>
