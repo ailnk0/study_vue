@@ -1,15 +1,6 @@
 <template>
 
-  <div v-if="isMsgShow" class="black-bg">
-    <div class="white-bg">
-      <img class="room-img" :src="products[curIndex].image">
-      <h4>{{ products[curIndex].title }}</h4>
-      <p>{{ products[curIndex].content }}</p>
-      <p>{{ products[curIndex].price }}원</p>
-      <Discount />
-      <button @click="toggleDetail">닫기</button>
-    </div>
-  </div>
+  <MsgDlg :products="products" :curIndex="curIndex" :isMsgShow="isMsgShow" :toggleDetail="toggleDetail" />
 
   <div class="menu">
     <img alt="Vue logo" src="./assets/logo.png">
@@ -17,7 +8,7 @@
   </div>
 
   <Discount />
-  
+
   <div v-for="(p, i) in products" :key="i" :style="itemStyle">
     <img class="room-img" :src="p.image">
     <h4 @click="toggleDetail(i)">{{ p.title }}</h4>
@@ -27,8 +18,9 @@
 </template>
 
 <script>
-import data from './rooms.js';
+import RoomsData from './rooms.js';
 import Discount from './DiscountBanner.vue';
+import MsgDlg from './MsgDlg.vue';
 
 export default {
   name: 'App',
@@ -37,7 +29,7 @@ export default {
       isMsgShow: false,
       curIndex: 0,
       menuItems: ['Home', 'Products', 'About'],
-      products: data,
+      products: RoomsData,
       itemStyle: 'color : darkslateblue'
     }
   },
@@ -49,6 +41,7 @@ export default {
   },
   components: {
     Discount: Discount,
+    MsgDlg: MsgDlg,
   }
 }
 </script>
