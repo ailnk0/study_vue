@@ -1,5 +1,5 @@
 <template>
-  <MsgDlg @toggleDetail="toggleDetail($event)" :products="products" :curIndex="curIndex" :isMsgShow="isMsgShow" />
+  <MsgDlg v-if="isMsgShow" @toggleDetail="toggleDetail($event)" :p="products[curIndex]" />
   <div class="menu">
     <img alt="Vue logo" src="./assets/logo.png">
     <a v-for="item in menuItems" :key="item">{{ item }}</a>
