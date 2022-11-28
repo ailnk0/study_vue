@@ -7,6 +7,13 @@
     <a v-for="item in menuItems" :key="item">{{ item }}</a>
   </div>
   <Discount />
+
+  <Button @click="priceSort(true)">낮은 가격순 정렬</Button>
+  <Button @click="priceSort(false)">높은 가격순 정렬</Button>
+  <Button @click="titleSort(true)">제목 오름차순 정렬</Button>
+  <Button @click="titleSort(false)">제목 내림차순 정렬</Button>
+  <Button @click="undoSort">되돌리기</Button>
+
   <ProductCard @toggleDetail="toggleDetail($event)" v-for="(p, i) in products" :key="i" :p="p" :i="i"
     :style="itemStyle" />
 </template>
@@ -21,6 +28,7 @@ export default {
   name: 'App',
   data() {
     return {
+      undoQueue: [],
       isMsgShow: false,
       curIndex: 0,
       menuItems: ['Home', 'Products', 'About'],
@@ -32,6 +40,31 @@ export default {
     toggleDetail(i) {
       this.isMsgShow = !this.isMsgShow;
       this.curIndex = i;
+    },
+    priceSort(isLow) {
+      this.undoQueue.push([...this.products]);
+      this.products.sort(function (a, b) {
+        if (isLow) {
+          return a.price - b.price;
+        } else {
+          return b.price - a.price;
+        }
+      });
+    },
+    titleSort(isLow) {
+      this.undoQueue.push([...this.products]);
+      this.products.sort(function (a, b) {
+        if (isLow) {
+          return a.title.localeCompare(b.title);
+        } else {
+          return b.title.localeCompare(a.title);
+        }
+      });
+    },
+    undoSort() {
+      if (this.undoQueue.length > 0) {
+        this.products = this.undoQueue.pop();
+      }
     }
   },
   components: {
