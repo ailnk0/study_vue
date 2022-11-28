@@ -1,5 +1,7 @@
 <template>
-  <MsgDlg v-if="isMsgShow" @toggleDetail="toggleDetail($event)" :p="products[curIndex]" />
+  <Transition name="fade">
+    <MsgDlg v-if="isMsgShow" @toggleDetail="toggleDetail($event)" :p="products[curIndex]" />
+  </Transition>
   <div class="menu">
     <img alt="Vue logo" src="./assets/logo.png">
     <a v-for="item in menuItems" :key="item">{{ item }}</a>
@@ -51,7 +53,7 @@ div {
 
 .black-bg {
   width: 100%;
-  height: 100%;
+  height: 200%;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   padding: 20px;
@@ -93,5 +95,29 @@ div {
 .room-img {
   width: 100%;
   margin-top: 40px;
+}
+
+.fade-enter-from {
+  transform: translateY(-1000px);
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-enter-to {
+  transform: translateY(0px);
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: all 1s;
+}
+
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
