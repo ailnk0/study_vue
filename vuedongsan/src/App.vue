@@ -1,26 +1,18 @@
 <template>
-
   <MsgDlg :products="products" :curIndex="curIndex" :isMsgShow="isMsgShow" :toggleDetail="toggleDetail" />
-
   <div class="menu">
     <img alt="Vue logo" src="./assets/logo.png">
     <a v-for="item in menuItems" :key="item">{{ item }}</a>
   </div>
-
   <Discount />
-
-  <div v-for="(p, i) in products" :key="i" :style="itemStyle">
-    <img class="room-img" :src="p.image">
-    <h4 @click="toggleDetail(i)">{{ p.title }}</h4>
-    <p>{{ p.price }}원</p>
-  </div>
-
+  <ProductCard v-for="(p, i) in products" :key="i" :p="p" :i="i" :toggleDetail="toggleDetail" :style="itemStyle"/>
 </template>
 
 <script>
 import RoomsData from './rooms.js';
 import Discount from './DiscountBanner.vue';
 import MsgDlg from './MsgDlg.vue';
+import ProductCard from './ProductCard.vue';
 
 export default {
   name: 'App',
@@ -42,6 +34,7 @@ export default {
   components: {
     Discount: Discount,
     MsgDlg: MsgDlg,
+    ProductCard: ProductCard,
   }
 }
 </script>
