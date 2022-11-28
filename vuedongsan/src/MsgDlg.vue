@@ -22,6 +22,20 @@ export default {
       month: 1,
     }
   },
+  watch: {
+    month(cur, prev) {
+      if (cur >= 13) {
+        alert('최대 12개월 까지만 가능합니다.');
+        this.month = prev;
+        return;
+      }
+      if (isNaN(cur)) {
+        alert('숫자만 입력 가능합니다.');
+        this.month = prev;
+        return;
+      }
+    },
+  },
   props: {
     p: Object,
   },
