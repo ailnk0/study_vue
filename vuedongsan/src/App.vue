@@ -6,7 +6,8 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <a v-for="item in menuItems" :key="item">{{ item }}</a>
   </div>
-  <Discount />
+
+  <Discount v-if="isShowDiscount" :discount="discount" />
 
   <Button @click="priceSort(true)">낮은 가격순 정렬</Button>
   <Button @click="priceSort(false)">높은 가격순 정렬</Button>
@@ -28,6 +29,8 @@ export default {
   name: 'App',
   data() {
     return {
+      isShowDiscount: true,
+      discount: 30,
       undoQueue: [],
       isMsgShow: false,
       curIndex: 0,
@@ -43,7 +46,7 @@ export default {
     },
     priceSort(isLow) {
       this.undoQueue.push([...this.products]);
-      this.products.sort(function (a, b) {
+      this.products.sort((a, b) => {
         if (isLow) {
           return a.price - b.price;
         } else {
@@ -53,7 +56,7 @@ export default {
     },
     titleSort(isLow) {
       this.undoQueue.push([...this.products]);
-      this.products.sort(function (a, b) {
+      this.products.sort((a, b) => {
         if (isLow) {
           return a.title.localeCompare(b.title);
         } else {
@@ -66,6 +69,17 @@ export default {
         this.products = this.undoQueue.pop();
       }
     }
+  },
+  created() {
+
+  },
+  mounted() {
+    setInterval(() => {
+      this.discount--;
+    }, 1000);
+    setTimeout(() => {
+      this.isShowDiscount = false;
+    }, this.discount * 1000);
   },
   components: {
     Discount: Discount,

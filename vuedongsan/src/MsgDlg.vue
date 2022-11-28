@@ -43,6 +43,11 @@ export default {
     send() {
       this.$emit('toggleDetail', this.p.id);
     }
+  },
+  updated() {
+    if (this.month == 2) {
+      alert('2개월입니다');
+    }
   }
 }
 </script>
