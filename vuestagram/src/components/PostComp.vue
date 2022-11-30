@@ -1,14 +1,10 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile">
-        <img :src="post.userImage" />
-      </div>
+      <div class="profile" :style="{ backgroundImage: `url(${post.userImage})` }"></div>
       <span class="profile-name">{{ post.name }}</span>
     </div>
-    <div class="post-body">
-      <img :src="post.postImage" />
-    </div>
+    <div class="post-body" :style="{ backgroundImage: `url(${post.postImage})` }"></div>
     <div class="post-content">
       <p>{{ post.likes }} Likes</p>
       <p><strong>{{ post.filter }}</strong> {{ post.content }}</p>
@@ -39,11 +35,6 @@ export default {
   float: left;
 }
 
-.profile img {
-  width: 100%;
-  border-radius: 50%;
-}
-
 .profile-name {
   display: block;
   float: left;
@@ -58,12 +49,9 @@ export default {
 }
 
 .post-body {
+  height: 450px;
   background-position: center;
   background-size: cover;
-}
-
-.post-body img {
-  width: 100%;
 }
 
 .post-content {
