@@ -31,13 +31,25 @@
       </div>
     </div>
   </header>
+
+  <div class="container mt-4">
+    <PostList v-for="p in posts" :key="p" :p="p" />
+  </div>
 </template>
 
 <script>
+import PostList from './components/PostList.vue';
+import Posts from './assets/posts.js';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      posts: Posts,
+    }
+  },
   components: {
+    PostList: PostList,
   }
 }
 </script>
