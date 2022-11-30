@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-for="p in posts" :key="p">
-    <div class="card shadow-sm m-3">
+    <div class="card shadow-sm mb-3">
       <img class="bd-placeholder-img card-img-top" width="100%" :src="p.image" />
       <div class="card-body">
         <p class="card-text">{{ p.title }}</p>
