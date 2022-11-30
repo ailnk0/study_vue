@@ -7,6 +7,10 @@ import C404Page from "./components/C404Page.vue";
 const routes = [
   {
     path: "/",
+    component: PostPage,
+  },
+  {
+    path: "/Home",
     component: HomePage,
   },
   {
