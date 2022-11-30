@@ -32,13 +32,11 @@
     </div>
   </header>
 
-  <div class="container mt-4">
-    <PostList v-for="p in posts" :key="p" :p="p" />
-  </div>
+  <router-view :posts="posts"></router-view>
+
 </template>
 
 <script>
-import PostList from './components/PostList.vue';
 import Posts from './assets/posts.js';
 
 export default {
@@ -49,7 +47,6 @@ export default {
     }
   },
   components: {
-    PostList: PostList,
   }
 }
 </script>
@@ -61,5 +58,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  max-width: 576px;
 }
 </style>
