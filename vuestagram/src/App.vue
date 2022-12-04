@@ -1,17 +1,21 @@
 <template>
   <div class="header d-flex flex-row">
-    <button class="btn btn-outline-info border-0 bg-white">Cancel</button>
+    <button v-if="(container_step == 1 || container_step == 2)" @click="reset"
+      class="btn btn-outline-info border-0 bg-white">Cancel</button>
     <img class="logo" src="./assets/logo.png" />
-    <button class="btn btn-outline-info border-0 bg-white">Next</button>
+    <button v-if="(container_step == 1)" @click="next" class="btn btn-outline-info border-0 bg-white">Next</button>
+    <button v-if="(container_step == 2)" @click="publish"
+      class="btn btn-outline-info border-0 bg-white">publish</button>
   </div>
 
-  <ContainerComp :post_data="post_data" :container_step="container_step" :upload_img_url="upload_img_url" />
+  <ContainerComp @write="upload_text = $event" :post_data="post_data" :container_step="container_step"
+    :upload_img_url="upload_img_url" />
 
-  <div class="text-center">
+  <div v-if="(container_step == 0)" class="text-center">
     <Button class="btn btn-link btn-sm" @click="more">더 보기 ...</Button>
   </div>
 
-  <div class="footer">
+  <div v-if="(container_step == 0)" class="footer">
     <div class="footer-button-plus">
       <input @change="upload" accept="image/*" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
@@ -29,6 +33,7 @@ export default {
   data() {
     return {
       upload_img_url: '',
+      upload_text: '',
       container_step: 0,
       more_count: 0,
       post_data: post_data,
@@ -44,9 +49,32 @@ export default {
         });
     },
     upload(e) {
+      this.reset();
       let f = e.target.files;
       this.upload_img_url = URL.createObjectURL(f[0]);
       this.container_step = 1;
+    },
+    reset() {
+      this.container_step = 0;
+      this.upload_img_url = '';
+      this.upload_text = '';
+    },
+    next() {
+      this.container_step++;
+    },
+    publish() {
+      let newPost = {
+        name: "Minny",
+        userImage: "https://placeimg.com/100/100/animals",
+        postImage: this.upload_img_url,
+        likes: 0,
+        date: "Apr 4",
+        liked: false,
+        content: this.upload_text,
+        filter: "lofi"
+      };
+      this.post_data.unshift(newPost);
+      this.reset();
     }
   },
   components: {
@@ -75,6 +103,7 @@ ul {
 
 .header {
   width: 100%;
+  height: 50px;
   background-color: white;
   position: sticky;
   top: 0;
