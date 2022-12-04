@@ -21,11 +21,17 @@
       <textarea @input="$emit('write', $event.target.value)" class="write-box" placeholder="write!"></textarea>
     </div>
   </div>
+
+  <!-- 내 정보 -->
+  <div v-if="(container_step == 3)">
+    <MyPage />
+  </div>
 </template>
 
 <script>
 import PostComp from './PostComp.vue'
 import FilterBox from './FilterBox.vue'
+import MyPage from './MyPage.vue'
 import FilterList from '../assets/filter_list.js'
 
 export default {
@@ -42,6 +48,7 @@ export default {
   components: {
     PostComp: PostComp,
     FilterBox: FilterBox,
+    MyPage: MyPage,
   }
 }
 </script>

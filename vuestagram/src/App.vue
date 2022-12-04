@@ -1,11 +1,21 @@
 <template>
-  <div class="header d-flex flex-row">
-    <button v-if="(container_step == 1 || container_step == 2)" @click="reset"
-      class="btn btn-outline-info border-0 bg-white">Cancel</button>
-    <img class="logo" src="./assets/logo.png" />
-    <button v-if="(container_step == 1)" @click="next" class="btn btn-outline-info border-0 bg-white">Next</button>
-    <button v-if="(container_step == 2)" @click="publish"
-      class="btn btn-outline-info border-0 bg-white">publish</button>
+  <div class="header">
+    <div class="row border">
+      <div class="col text-start border">
+        <button v-if="(container_step != 0)" @click="reset"
+          class="btn btn-outline-info border-0 bg-white">Cancel</button>
+      </div>
+      <div class="col text-center border">
+        <img class="logo" src="./assets/logo.png" />
+      </div>
+      <div class="col text-end border">
+        <button v-if="(container_step == 1)" @click="next" class="btn btn-outline-info border-0 bg-white">Next</button>
+        <button v-if="(container_step == 2)" @click="publish"
+          class="btn btn-outline-info border-0 bg-white">publish</button>
+        <button v-if="(container_step == 0)" @click="(container_step = 3)"
+          class="btn btn-outline-info border-0 bg-white">Follow</button>
+      </div>
+    </div>
   </div>
 
   <ContainerComp @write="upload.text = $event" :post_data="post_data" :container_step="container_step"
