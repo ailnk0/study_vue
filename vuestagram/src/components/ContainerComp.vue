@@ -8,11 +8,7 @@
   <div v-if="(container_step == 1)">
     <div class="upload-image" :style="{ backgroundImage: `url(${upload_img_url})` }"></div>
     <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <FilterBox v-for="filter in filter_list" :key="filter" :filter="filter" :upload_img_url="upload_img_url" />
     </div>
   </div>
 
@@ -27,8 +23,15 @@
 
 <script>
 import PostComp from './PostComp.vue'
+import FilterBox from './FilterBox.vue'
+import FilterList from '../assets/filter_list.js'
 
 export default {
+  data() {
+    return {
+      filter_list: FilterList,
+    }
+  },
   props: {
     upload_img_url: String,
     container_step: Number,
@@ -36,6 +39,7 @@ export default {
   },
   components: {
     PostComp: PostComp,
+    FilterBox: FilterBox,
   }
 }
 </script>
