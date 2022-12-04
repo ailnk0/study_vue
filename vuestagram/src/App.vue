@@ -1,23 +1,21 @@
 <template>
-  <div class="header">
-    <ul class="header-button-left">
-      <li>Cancel</li>
-    </ul>
-    <ul class="header-button-right">
-      <li>Next</li>
-    </ul>
-    <img src="./assets/logo.png" class="logo" />
+  <div class="header d-flex flex-row">
+    <button class="btn btn-outline-info border-0 bg-white">Cancel</button>
+    <img class="logo" src="./assets/logo.png" />
+    <button class="btn btn-outline-info border-0 bg-white">Next</button>
   </div>
 
-  <ContainerComp :post_data="post_data" />
+  <ContainerComp :post_data="post_data" :container_step="container_step" :upload_img_url="upload_img_url" />
 
-  <Button @click="more">더 보기</Button>
+  <div class="text-center">
+    <Button class="btn btn-link btn-sm" @click="more">더 보기 ...</Button>
+  </div>
 
   <div class="footer">
-    <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+    <div class="footer-button-plus">
+      <input @change="upload" accept="image/*" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
-    </ul>
+    </div>
   </div>
 </template>
 
@@ -30,19 +28,25 @@ export default {
   name: 'App',
   data() {
     return {
+      upload_img_url: '',
+      container_step: 0,
       more_count: 0,
       post_data: post_data,
     }
   },
   methods: {
     more() {
-      axios.get(`https://codingapple1.github.io/vue/more${this.more_count}.json`)
+      axios.get(`https://codingapple1.github.io/vue/more${this.more_count++}.json`)
         .then((response) => {
           this.post_data.push(response.data);
-          this.more_count++;
         })
         .catch((/*error*/) => {
         });
+    },
+    upload(e) {
+      let f = e.target.files;
+      this.upload_img_url = URL.createObjectURL(f[0]);
+      this.container_step = 1;
     }
   },
   components: {
@@ -64,8 +68,6 @@ ul {
 .logo {
   width: 22px;
   margin: auto;
-  display: block;
-  position: absolute;
   left: 0;
   right: 0;
   top: 13px;
@@ -73,26 +75,14 @@ ul {
 
 .header {
   width: 100%;
-  height: 40px;
   background-color: white;
-  padding-bottom: 8px;
   position: sticky;
   top: 0;
 }
 
-.header-button-left {
+.header-button {
+  box-sizing: border-box;
   color: skyblue;
-  float: left;
-  width: 50px;
-  padding-left: 20px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.header-button-right {
-  color: skyblue;
-  float: right;
-  width: 50px;
   cursor: pointer;
   margin-top: 10px;
 }
@@ -126,6 +116,11 @@ ul {
 
 .input-plus {
   cursor: pointer;
+}
+
+.btn-more {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #app {

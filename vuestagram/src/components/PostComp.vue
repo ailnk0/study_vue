@@ -1,14 +1,14 @@
 <template>
-  <div class="post">
-    <div class="post-header">
-      <div class="profile" :style="{ backgroundImage: `url(${post.userImage})` }"></div>
-      <span class="profile-name">{{ post.name }}</span>
+  <div class="post d-flex flex-column mb-5">
+    <div class="post-header d-flex flex-row">
+      <div class="post-profile" :style="{ backgroundImage: `url(${post.userImage})` }"></div>
+      <span class="post-profile-name">{{ post.name }}</span>
     </div>
     <div class="post-body" :style="{ backgroundImage: `url(${post.postImage})` }"></div>
     <div class="post-content">
       <p>{{ post.likes }} Likes</p>
       <p><strong>{{ post.filter }}</strong> {{ post.content }}</p>
-      <p class="date">{{ post.date }}</p>
+      <p class="post-date">{{ post.date }}</p>
     </div>
   </div>
 </template>
@@ -24,27 +24,22 @@ export default {
 <style>
 .post {
   width: 100%;
-  margin-bottom: 50px;
 }
 
-.profile {
+.post-profile {
   width: 30px;
   height: 30px;
   background-size: 100%;
   border-radius: 50%;
-  float: left;
 }
 
-.profile-name {
-  display: block;
-  float: left;
+.post-profile-name {
   padding-left: 10px;
   padding-top: 7px;
   font-size: 14px;
 }
 
 .post-header {
-  height: 30px;
   padding: 10px;
 }
 
@@ -60,7 +55,7 @@ export default {
   font-size: 14px;
 }
 
-.date {
+.post-date {
   font-size: 11px;
   color: grey;
   margin-top: -8px;
