@@ -8,8 +8,7 @@
   <div v-if="(container_step == 1)">
     <div class="upload-image" :class="`${upload.filter}`" :style="{ backgroundImage: `url(${upload.img_url})` }"></div>
     <div class="filters">
-      <FilterBox v-for="filter in filter_list" :key="filter" :filter="filter" :upload="upload"
-        @click="$emit('filter', filter)">
+      <FilterBox v-for="filter in filter_list" :key="filter" :filter="filter" :upload="upload">
         <template v-slot:filter_name>{{ filter }}</template>
       </FilterBox>
     </div>

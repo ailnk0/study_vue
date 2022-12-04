@@ -8,8 +8,8 @@
       class="btn btn-outline-info border-0 bg-white">publish</button>
   </div>
 
-  <ContainerComp @write="upload.text = $event" @filter="upload.filter = $event" :post_data="post_data"
-    :container_step="container_step" :upload="upload" />
+  <ContainerComp @write="upload.text = $event" :post_data="post_data" :container_step="container_step"
+    :upload="upload" />
 
   <div v-if="(container_step == 0)" class="text-center">
     <Button class="btn btn-link btn-sm" @click="more">더 보기 ...</Button>
@@ -41,6 +41,11 @@ export default {
       more_count: 0,
       post_data: post_data,
     }
+  },
+  mounted() {
+    this.emitter.on('filter_changed', (v) => {
+      this.upload.filter = v;
+    });
   },
   methods: {
     more() {

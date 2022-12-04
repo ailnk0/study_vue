@@ -1,5 +1,5 @@
 <template>
-  <div :class="`filter-box ${filter}`" :style="{ backgroundImage: `url(${upload.img_url})` }">
+  <div @click="fire" :class="`filter-box ${filter}`" :style="{ backgroundImage: `url(${upload.img_url})` }">
     <slot name="filter_name"></slot>
   </div>
 </template>
@@ -9,6 +9,11 @@ export default {
   props: {
     filter: String,
     upload: Object,
+  },
+  methods: {
+    fire() {
+      this.emitter.emit('filter_changed', this.filter);
+    }
   }
 }
 </script>
