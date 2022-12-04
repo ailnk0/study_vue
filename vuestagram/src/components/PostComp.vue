@@ -4,9 +4,10 @@
       <div class="post-profile" :style="{ backgroundImage: `url(${post.userImage})` }"></div>
       <span class="post-profile-name">{{ post.name }}</span>
     </div>
-    <div :class="`post-body ${post.filter}`" :style="{ backgroundImage: `url(${post.postImage})` }"></div>
+    <div @click="$store.commit('increment')" :class="`post-body ${post.filter}`"
+      :style="{ backgroundImage: `url(${post.postImage})` }"></div>
     <div class="post-content">
-      <p>{{ post.likes }} Likes</p>
+      <p>{{ $store.state.count }} Likes</p>
       <p><strong>{{ post.filter }}</strong> {{ post.content }}</p>
       <p class="post-date">{{ post.date }}</p>
     </div>
