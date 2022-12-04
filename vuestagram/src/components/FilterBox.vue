@@ -1,6 +1,7 @@
 <template>
-  <div :class="`filter-box ${filter}`" :style="{ backgroundImage: `url(${upload.img_url})` }"></div>
-
+  <div :class="`filter-box ${filter}`" :style="{ backgroundImage: `url(${upload.img_url})` }">
+    <slot name="filter_name"></slot>
+  </div>
 </template>
 
 <script>
