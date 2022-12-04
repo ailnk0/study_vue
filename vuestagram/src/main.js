@@ -5,6 +5,7 @@ import mitt from 'mitt'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './registerServiceWorker'
 
 let emitter = mitt()
 let app = createApp(App)
