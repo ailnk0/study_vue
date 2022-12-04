@@ -8,8 +8,8 @@
       class="btn btn-outline-info border-0 bg-white">publish</button>
   </div>
 
-  <ContainerComp @write="upload_text = $event" :post_data="post_data" :container_step="container_step"
-    :upload_img_url="upload_img_url" />
+  <ContainerComp @write="upload.text = $event" @filter="upload.filter = $event" :post_data="post_data"
+    :container_step="container_step" :upload="upload" />
 
   <div v-if="(container_step == 0)" class="text-center">
     <Button class="btn btn-link btn-sm" @click="more">더 보기 ...</Button>
@@ -17,7 +17,7 @@
 
   <div v-if="(container_step == 0)" class="footer">
     <div class="footer-button-plus">
-      <input @change="upload" accept="image/*" type="file" id="file" class="inputfile" />
+      <input @change="create" accept="image/*" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </div>
   </div>
@@ -32,8 +32,11 @@ export default {
   name: 'App',
   data() {
     return {
-      upload_img_url: '',
-      upload_text: '',
+      upload: {
+        img_url: '',
+        text: '',
+        filter: '',
+      },
       container_step: 0,
       more_count: 0,
       post_data: post_data,
@@ -48,16 +51,17 @@ export default {
         .catch((/*error*/) => {
         });
     },
-    upload(e) {
+    create(e) {
       this.reset();
       let f = e.target.files;
-      this.upload_img_url = URL.createObjectURL(f[0]);
+      this.upload.img_url = URL.createObjectURL(f[0]);
       this.container_step = 1;
     },
     reset() {
       this.container_step = 0;
-      this.upload_img_url = '';
-      this.upload_text = '';
+      this.upload.img_url = '';
+      this.upload.text = '';
+      this.upload.filter = '';
     },
     next() {
       this.container_step++;
@@ -66,13 +70,14 @@ export default {
       let newPost = {
         name: "Minny",
         userImage: "https://placeimg.com/100/100/animals",
-        postImage: this.upload_img_url,
+        postImage: this.upload.img_url,
         likes: 0,
         date: "Apr 4",
         liked: false,
-        content: this.upload_text,
-        filter: "lofi"
+        content: this.upload.text,
+        filter: this.upload.filter,
       };
+      console.log(newPost.filter);
       this.post_data.unshift(newPost);
       this.reset();
     }

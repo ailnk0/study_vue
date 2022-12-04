@@ -1,16 +1,13 @@
 <template>
-  <div :class="`filter-box ${filter}`" :style="{ backgroundImage: `url(${upload_img_url})` }"></div>
+  <div :class="`filter-box ${filter}`" :style="{ backgroundImage: `url(${upload.img_url})` }"></div>
+
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-    }
-  },
   props: {
     filter: String,
-    upload_img_url: String,
+    upload: Object,
   }
 }
 </script>

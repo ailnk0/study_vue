@@ -6,15 +6,16 @@
 
   <!-- 필터선택페이지 -->
   <div v-if="(container_step == 1)">
-    <div class="upload-image" :style="{ backgroundImage: `url(${upload_img_url})` }"></div>
+    <div class="upload-image" :class="`${upload.filter}`" :style="{ backgroundImage: `url(${upload.img_url})` }"></div>
     <div class="filters">
-      <FilterBox v-for="filter in filter_list" :key="filter" :filter="filter" :upload_img_url="upload_img_url" />
+      <FilterBox v-for="filter in filter_list" :key="filter" :filter="filter" :upload="upload"
+        @click="$emit('filter', filter)" />
     </div>
   </div>
 
   <!-- 글작성페이지 -->
   <div v-if="(container_step == 2)">
-    <div class="upload-image" :style="{ backgroundImage: `url(${upload_img_url})` }"></div>
+    <div class="upload-image" :style="{ backgroundImage: `url(${upload.img_url})` }"></div>
     <div class="write">
       <textarea @input="$emit('write', $event.target.value)" class="write-box" placeholder="write!"></textarea>
     </div>
@@ -33,7 +34,7 @@ export default {
     }
   },
   props: {
-    upload_img_url: String,
+    upload: Object,
     container_step: Number,
     post_data: Array,
   },
