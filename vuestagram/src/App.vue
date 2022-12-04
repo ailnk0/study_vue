@@ -1,14 +1,14 @@
 <template>
   <div class="header">
-    <div class="row border">
-      <div class="col text-start border">
+    <div class="row">
+      <div class="col text-start">
         <button v-if="(container_step != 0)" @click="reset"
           class="btn btn-outline-info border-0 bg-white">Cancel</button>
       </div>
-      <div class="col text-center border">
-        <img class="logo" src="./assets/logo.png" />
+      <div class="col text-center">
+        <img class="logo m-2" src="./assets/logo.png" />
       </div>
-      <div class="col text-end border">
+      <div class="col text-end">
         <button v-if="(container_step == 1)" @click="next" class="btn btn-outline-info border-0 bg-white">Next</button>
         <button v-if="(container_step == 2)" @click="publish"
           class="btn btn-outline-info border-0 bg-white">publish</button>
@@ -116,17 +116,15 @@ ul {
 .logo {
   width: 22px;
   margin: auto;
-  left: 0;
-  right: 0;
-  top: 13px;
 }
 
 .header {
   width: 100%;
-  height: 50px;
+  height: 40px;
   background-color: white;
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
 .header-button {
