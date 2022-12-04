@@ -11,6 +11,8 @@
 
   <ContainerComp :post_data="post_data" />
 
+  <Button @click="more">더 보기</Button>
+
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
@@ -22,12 +24,25 @@
 <script>
 import ContainerComp from './components/ContainerComp.vue'
 import post_data from './assets/post_data.js'
+import axios from 'axios'
 
 export default {
   name: 'App',
   data() {
     return {
+      more_count: 0,
       post_data: post_data,
+    }
+  },
+  methods: {
+    more() {
+      axios.get(`https://codingapple1.github.io/vue/more${this.more_count}.json`)
+        .then((response) => {
+          this.post_data.push(response.data);
+          this.more_count++;
+        })
+        .catch((/*error*/) => {
+        });
     }
   },
   components: {
