@@ -4,10 +4,11 @@
       <div class="post-profile" :style="{ backgroundImage: `url(${post.userImage})` }"></div>
       <span class="post-profile-name">{{ post.name }}</span>
     </div>
-    <div @click="$store.commit('increment')" :class="`post-body ${post.filter}`"
-      :style="{ backgroundImage: `url(${post.postImage})` }"></div>
+    <div @click="increment()" :class="`post-body ${post.filter}`"
+      :style="{ backgroundImage: `url(${post.postImage})` }">
+    </div>
     <div class="post-content">
-      <p>{{ $store.state.count }} Likes</p>
+      <p>{{ count }} Likes</p>
       <p><strong>{{ post.filter }}</strong> {{ post.content }}</p>
       <p class="post-date">{{ post.date }}</p>
     </div>
@@ -15,9 +16,17 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
+
 export default {
   props: {
     post: Object,
+  },
+  computed: {
+    ...mapState(['count']),
+  },
+  methods: {
+    ...mapMutations(['increment']),
   }
 }
 </script>
